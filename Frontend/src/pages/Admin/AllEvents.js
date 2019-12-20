@@ -2,7 +2,7 @@ import React from 'react'
 import Header from '../../components/shared/headerAdmin'
 import { getAllEvents } from '../../services/get'
 import './style.css'
-import Moment from 'react-moment';
+import Axios from 'axios';
 
 class AllEvents extends React.Component {
 
@@ -29,7 +29,7 @@ class AllEvents extends React.Component {
             editarModal: {
                 id_event: this.state.allEvents.id_event,
                 id_active: this.state.allEvents.id_active,
-                id_responsible: this.state.allEvents.id_responsible,
+                id_responsible: this.state.allEvents.id_responsible,  
             }
         })
 
@@ -61,11 +61,7 @@ class AllEvents extends React.Component {
                                     return (
                                         <tr>
                                             <th scope="row">{res.name_event}</th>
-                                            <td>
-                                                <Moment class='data-formato-aprovar' format="DD/MM/YYYY">
-                                                    {res.date_event}
-                                                </Moment>
-                                            </td>
+                                            <td>{res.date_event}</td>
                                             <td><button className="btn btn-sm btn-grey" data-toggle="modal" data-target={`#modal-${res.id_event}`}>Detalhes</button></td>
                                             <td><button type="button" className="btn btn-sm btn-outline-danger waves-effect" data-dismiss="modal">Recusar</button></td>
                                             <td><button type="button" data-toggle="modal" data-target={`#aprova-${res.id_event}`} className="btn btn-sm btn-outline-success waves-effect">Aprovar</button></td>
