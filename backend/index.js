@@ -119,7 +119,7 @@ app.put("/event/:id", (req, res) => {
 })
 app.put("/event/decline/:id", (req, res) => {
     var id_event = req.params.id_event
-    var id_responsible = req.body.id_responsible
+    var id_active = req.body.id_active
     const sql = "UPDATE event SET id_active = ? WHERE id_event = ?;"
     conexao().query(sql, [id_active, id_event], (erro, ln, cl) => {
         console.log("Listagem")
