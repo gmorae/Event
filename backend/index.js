@@ -107,8 +107,27 @@ app.post('/user', (req, res) => {
 
 /** Começo da API de eventos  */
 
+app.put("/event/:id", (req, res) => {
+    var id_event = req.body.id_event
+    var id_responsible = req.body.id_responsible
+    var id_active = req.body.id_active
+    const sql = "UPDATE event SET id_responsible = ?, id_active = ? WHERE id_event = ?;"
+    conexao().query(sql, [id_responsible,id_active, id_event], (erro, ln, cl) => {
+        console.log("Listagem")
+        res.json(ln)
+    })
+})
+app.put("/event/decline/:id", (req, res) => {
+    var id_event = req.params.id_event
+    var id_responsible = req.body.id_responsible
+    const sql = "UPDATE event SET id_active = ? WHERE id_event = ?;"
+    conexao().query(sql, [id_active, id_event], (erro, ln, cl) => {
+        console.log("Listagem")
+        res.json(ln)
+    })
+})
 
-app.get("/event", (req, res) => { 
+app.get("/event", (req, res) => {
     const sql = "SELECT * FROM event AS e JOIN category AS c ON e.id_category = c.id_category where id_active = 0"
     conexao().query(sql, (erro, ln, cl) => {
         console.log("Listagem")
@@ -142,7 +161,7 @@ app.get("/event/pending", (req, res) => {
 
 app.get("/event/approved/:id", (req, res) => {
     const sql = "select * from event where id_user = ? and id_active = 2"
-    conexao().query(sql, [req.params.id],(erro, ln, cl) => {
+    conexao().query(sql, [req.params.id], (erro, ln, cl) => {
         console.log("Listagem")
         res.json(ln)
     })
@@ -150,7 +169,7 @@ app.get("/event/approved/:id", (req, res) => {
 
 app.get("/event/pending/:id", (req, res) => {
     const sql = "select * from event where id_user = ? and id_active = 0"
-    conexao().query(sql, [req.params.id],(erro, ln, cl) => {
+    conexao().query(sql, [req.params.id], (erro, ln, cl) => {
         console.log("Listagem")
         res.json(ln)
     })
@@ -158,7 +177,7 @@ app.get("/event/pending/:id", (req, res) => {
 
 app.get("/event/decline/:id", (req, res) => {
     const sql = "select * from event where id_user = ? and id_active = 2"
-    conexao().query(sql, [req.params.id],(erro, ln, cl) => {
+    conexao().query(sql, [req.params.id], (erro, ln, cl) => {
         console.log("Listagem")
         res.json(ln)
     })
@@ -171,7 +190,7 @@ app.post('/event', (req, res) => {
     var location = 'Escola senai de informatica'
     var id_category = req.body.id_category
     var id_user = req.body.id_user
-    var id_responsible = 0
+    var id_responsible = '0'
     var coffe = req.body.coffe
 
     const sql = "INSERT INTO event (name_event, description_event, date_event, id_active, location, id_category, id_user, id_responsible, coffe) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?);"

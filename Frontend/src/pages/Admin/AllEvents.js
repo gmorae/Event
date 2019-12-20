@@ -2,12 +2,21 @@ import React from 'react'
 import Header from '../../components/shared/headerAdmin'
 import { getAllEvents } from '../../services/get'
 import './style.css'
+import Axios from 'axios';
 
 class AllEvents extends React.Component {
 
     constructor() {
         super();
-        this.state = { allEvents: [] };
+        this.state = {
+            allEvents: [],
+            editarModal: {
+                id_user: '',
+                id_responsible: '',
+                id_active: ''
+            }
+        };
+
     }
 
     componentDidMount = async () => {
@@ -15,8 +24,17 @@ class AllEvents extends React.Component {
         this.setState({ allEvents: get.data })
     }
 
+    alterarUsuario() {
+        this.setState({
+            editarModal: {
+                id_event: this.state.allEvents.id_event,
+                id_active: this.state.allEvents.id_active,
+                id_responsible: this.state.allEvents.id_responsible,  
+            }
+        })
 
-
+        this.toggle();
+    }
     render() {
         return (
             <div>
@@ -27,9 +45,12 @@ class AllEvents extends React.Component {
                         <thead className="black white-text">
                             <tr>
 
-                                <th class="th-sm">Nome</th>
-                                <th class="th-sm">Data do evento</th>
-                                <th class="th-sm">Detalhes</th>
+                                <th className="th-sm">Nome</th>
+                                <th className="th-sm">Data do evento</th>
+                                <th className="th-sm">Detalhes</th>
+                                <th className="th-sm">Reprovar</th>
+                                <th className="th-sm">Aprovar</th>
+
 
                             </tr>
                         </thead>
@@ -41,7 +62,9 @@ class AllEvents extends React.Component {
                                         <tr>
                                             <th scope="row">{res.name_event}</th>
                                             <td>{res.date_event}</td>
-                                            <td><button class="btn btn-sm btn-grey" data-toggle="modal" data-target={`#modal-${res.id_event}`}>Detalhes</button></td>
+                                            <td><button className="btn btn-sm btn-grey" data-toggle="modal" data-target={`#modal-${res.id_event}`}>Detalhes</button></td>
+                                            <td><button type="button" className="btn btn-sm btn-outline-danger waves-effect" data-dismiss="modal">Recusar</button></td>
+                                            <td><button type="button" data-toggle="modal" data-target={`#aprova-${res.id_event}`} className="btn btn-sm btn-outline-success waves-effect">Aprovar</button></td>
 
                                         </tr>
                                     )
@@ -50,17 +73,17 @@ class AllEvents extends React.Component {
                             {
                                 this.state.allEvents.map((res) => {
                                     return (
-                                        <div class="modal fade" id={`modal-${res.id_event}`} tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                        <div className="modal fade" id={`modal-${res.id_event}`} tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                             aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Descrição do evento {res.name_event}</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <div className="modal-dialog" role="document">
+                                                <div className="modal-content">
+                                                    <div className="modal-header">
+                                                        <h5 className="modal-title" id="exampleModalLabel">Descrição do evento {res.name_event}</h5>
+                                                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <div class="modal-body">
+                                                    <div className="modal-body">
                                                         <div className="container text-left">
                                                             <div className="row">
                                                                 <div className="col-6">
@@ -73,19 +96,36 @@ class AllEvents extends React.Component {
                                                                 </div>
                                                             </div>
                                                             <h6>Descrição</h6><p>{res.description_event}</p>
-                                                            <div className="mt-2">
-                                                                <div class="md-form">
-                                                                    <input type="text" id="responsavel" class="form-control" />
-                                                                    <label for="responsavel">Nome do responsável</label>
-                                                                </div>
-                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-outline-danger waves-effect" data-dismiss="modal">Recusar</button>
-                                                        <button type="button" class="btn btn-outline-success waves-effect">Salvar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+                            {
+                                this.state.allEvents.map((res) => {
+                                    return (
+                                        <div className="modal fade" id={`aprova-${res.id_event}`} tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                            aria-hidden="true">
+                                            <div className="modal-dialog" role="document">
+                                                <div className="modal-content">
+                                                    <div className="modal-header">
+                                                        <h5 className="modal-title" id="exampleModalLabel">Aprovar evento</h5>
+                                                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
                                                     </div>
-
+                                                    <div className="modal-body">
+                                                        <form>
+                                                            <div class="md-form">
+                                                                <input type="text" id="form1" class="form-control" />
+                                                                <label for="form1">Coloque o nome do responsável</label>
+                                                            </div>
+                                                            <button type="submit" class="btn btn-success btn-sm text-rigth">Aprovar</button>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
