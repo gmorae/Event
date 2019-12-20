@@ -84,21 +84,13 @@ app.get("/community", (req, res) => {
     })
 })
 
-app.get("/employee", (req, res) => {
-    const sql = "select * from user where id_type_user = 3"
-    conexao().query(sql, (erro, ln, cl) => {
-        console.log("Listagem")
-        res.json(ln)
-
-    })
-})
 
 app.post('/user', (req, res) => {
     var name_user = req.body.name_user
     var email_user = req.body.email_user
     var phone_user = req.body.phone_user
     var password_user = req.body.password_user
-    var id_type_user = 3
+    var id_type_user = 2
 
     const sql = "INSERT INTO user (name_user, email_user, phone_user, password_user, id_type_user) VALUES ( ?, ?, ?, ?, ?);"
     conexao().query(sql, [name_user, email_user, phone_user, password_user, id_type_user], (erro, result, fields) => {
@@ -116,8 +108,8 @@ app.post('/user', (req, res) => {
 /** Começo da API de eventos  */
 
 
-app.get("/event", (req, res) => {
-    const sql = "select * from event"
+app.get("/event", (req, res) => { 
+    const sql = "SELECT * FROM event AS e JOIN category AS c ON e.id_category = c.id_category where id_active = 0"
     conexao().query(sql, (erro, ln, cl) => {
         console.log("Listagem")
         res.json(ln)

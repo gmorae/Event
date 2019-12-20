@@ -28,7 +28,7 @@ class headerAdmin extends React.Component {
                             <Link to="/Category">
                                 <i class="fa fa-paste fa-2x"></i>
                                 <span class="nav-text">
-                                    Category
+                                    Categorias
                                 </span>
                             </Link>
                         </li>
@@ -36,7 +36,7 @@ class headerAdmin extends React.Component {
                             <Link to="/AllEvents">
                                 <i class="fa fa-calendar fa-2x"></i>
                                 <span class="nav-text">
-                                    Todos os eventos
+                                    Eventos pendentes
                                 </span>
                             </Link>
                         </li>
