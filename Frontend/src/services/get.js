@@ -6,8 +6,9 @@ const getAllEvents      = () => request.get('/event')
 const getDeclineEvents  = () => request.get('/event/decline')
 const getApprovedEvents = () => request.get('/event/approved')
 const getCategory = () => request.get('/category')
-const getAllEventsUser = () => request.get('/event')
-const getEventsPending = () => request.get('/event/pending')
+const getEventsApprovedUser = (id) => request.get(`/event/approved/${id}`)
+const getEventsPendingUser = (id) => request.get(`/event/pending/${id}`)
+const getEventsDeclineUser = (id) => request.get(`/events/decline/${id}`)
 export 
 {
     getEmployees,
@@ -16,6 +17,7 @@ export
     getDeclineEvents,
     getApprovedEvents,
     getCategory,
-    getAllEventsUser,
-    getEventsPending
+    getEventsApprovedUser,
+    getEventsPendingUser,
+    getEventsDeclineUser
 };

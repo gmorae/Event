@@ -8,6 +8,6 @@ export const parseJwt = () => {
     var base64 = localStorage.getItem('usuario-easyTalk').split('.')[1]
 
     // Retorna o payload convertido de base64 para string e de string para JSON
-    console.log(JSON.parse(window.atob(base64)), '--------------------------')
+    console.log(JSON.parse(window.atob(base64)))
     return JSON.parse(window.atob(base64))
 }

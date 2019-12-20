@@ -1,7 +1,8 @@
 import React from 'react'
 import Header from '../../components/shared/headerUsers'
-import { getEventsPending } from '../../services/get'
+import { getEventsPendingUser } from '../../services/get'
 import './style.css'
+import { parseJwt } from '../../services/auth';
 
 class EventsPending extends React.Component {
 
@@ -11,7 +12,7 @@ class EventsPending extends React.Component {
     }
 
     componentDidMount = async () => {
-        const get = await getEventsPending()
+        const get = await getEventsPendingUser(parseJwt().user.id_user)
         this.setState({ EventsPending: get.data })
     }
 
@@ -29,8 +30,6 @@ class EventsPending extends React.Component {
 
                                 <th class="th-sm">Nome</th>
                                 <th class="th-sm">Data do evento</th>
-                                <th class="th-sm">Status</th>
-                                <th class="th-sm">Responsavel</th>
                                 <th class="th-sm">Detalhes</th>
 
                             </tr>
@@ -42,10 +41,8 @@ class EventsPending extends React.Component {
                                     return (
 
                                         <tr>
-                                            <th scope="row">{res.nome_evento}</th>
-                                            <td>{res.data_evento}</td>
-                                            <td>{res.ativo}</td>
-                                            <td>{res.id_responsavel}</td>
+                                            <th scope="row">{res.name_event}</th>
+                                            <td>{res.date_event}</td>
                                             <td><button class="btn btn-sm btn-grey">Detalhes</button></td>
 
                                         </tr>

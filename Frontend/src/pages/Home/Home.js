@@ -49,7 +49,7 @@ class Home extends React.Component {
                             {
                                 this.state.allEvents.map((res) => {
                                     return (
-                                        <div>
+                                        <div className="col-sm-12 col-md-4">
                                             <div className="card hoverable mb-4 col-12" key={res.id_event}>
                                                 <div className="card-body" >
                                                     <h4 className="card-title">{res.name_event}</h4>

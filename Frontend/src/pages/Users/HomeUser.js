@@ -6,6 +6,7 @@ import Axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './style.css'
+import { parseJwt } from '../../services/auth';
 
 export default class HomeUser extends React.Component {
     constructor() {
@@ -53,10 +54,8 @@ export default class HomeUser extends React.Component {
             id_category: this.state.id_category,
             date_event: this.state.date_event,
             coffe: this.state.coffe,
-            id_user: 1
-
-        };
-
+            id_user: parseJwt().user.id_user
+        };        
         Axios.post(`http://localhost:8080/event`, event)
             .then((res) => {
                 toast.success('Evento criado, aguarde pra ser aprovado');
@@ -64,7 +63,7 @@ export default class HomeUser extends React.Component {
             }).catch((error) => {
                 toast.error(error);
                 console.log(error)
-            });
+            });            
     }
     render() {
         return (

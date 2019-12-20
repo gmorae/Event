@@ -1,7 +1,8 @@
 import React from 'react'
 import Header from '../../components/shared/headerUsers'
-import { getAllEventsUser } from '../../services/get'
+import { getEventsApprovedUser } from '../../services/get'
 import './style.css'
+import { parseJwt } from '../../services/auth';
 
 class AllEventsUser extends React.Component {
 
@@ -11,8 +12,8 @@ class AllEventsUser extends React.Component {
     }
 
     componentDidMount = async () => {
-        const get = await getAllEventsUser()
-        this.setState({ AllEventsUser: get.data })
+        const get = await getEventsApprovedUser(parseJwt().user.id_user)
+        this.setState({ AllEventsUser: get.data })        
     }
 
     

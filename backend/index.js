@@ -148,6 +148,29 @@ app.get("/event/pending", (req, res) => {
     })
 })
 
+app.get("/event/approved/:id", (req, res) => {
+    const sql = "select * from event where id_user = ? and id_active = 2"
+    conexao().query(sql, [req.params.id],(erro, ln, cl) => {
+        console.log("Listagem")
+        res.json(ln)
+    })
+})
+
+app.get("/event/pending/:id", (req, res) => {
+    const sql = "select * from event where id_user = ? and id_active = 0"
+    conexao().query(sql, [req.params.id],(erro, ln, cl) => {
+        console.log("Listagem")
+        res.json(ln)
+    })
+})
+
+app.get("/event/decline/:id", (req, res) => {
+    const sql = "select * from event where id_user = ? and id_active = 2"
+    conexao().query(sql, [req.params.id],(erro, ln, cl) => {
+        console.log("Listagem")
+        res.json(ln)
+    })
+})
 app.post('/event', (req, res) => {
     var name_event = req.body.name_event
     var description_event = req.body.description_event
@@ -188,7 +211,6 @@ app.post('/login', (req, res) => {
                 let user = results[0]
                 if (results[0].password_user == password_user) {
                     jwt.sign({ user }, 'secretkey', (err, token) => {
-                        console.log(token);
                         res.send({
                             token
                         })
