@@ -1,13 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import './headerUsers.css'
-import auth from '../../services/auth'
 
 class headerAdmin extends React.Component {
 
     logout() {
         localStorage.clear();
-        window.location.href = '/';
+        window.location.href = '/Register';
     }
 
     render() {
@@ -54,14 +53,6 @@ class headerAdmin extends React.Component {
                                 <i class="fa fa-times fa-2x"></i>
                                 <span class="nav-text">
                                     Eventos rejeitados
-                                </span>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/Employees">
-                                <i class="fa fa-user fa-2x"></i>
-                                <span class="nav-text">
-                                    Funcionários
                                 </span>
                             </Link>
                         </li>

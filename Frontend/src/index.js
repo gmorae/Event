@@ -7,7 +7,6 @@ import HomeUser from './pages/Users/HomeUser';
 import AllEvents from './pages/Admin/AllEvents';
 import ApprovedEvents from './pages/Admin/ApprovedEvents';
 import DeclineEvents from './pages/Admin/DeclineEvents';
-import Employees from './pages/Admin/Employees';
 import Community from './pages/Admin/Community';
 import Category from './pages/Admin/Category';
 import AllEventsUser from './pages/Users/AllEventUser';
@@ -50,7 +49,6 @@ const Rotas = (
       <PrivateRoute path="/AllEvents" component={AllEvents} />
       <PrivateRoute path="/ApprovedEvents" component={ApprovedEvents} />
       <PrivateRoute path="/DeclineEvents" component={DeclineEvents} />
-      <PrivateRoute path="/Employees" component={Employees} />
       <PrivateRoute path="/Community" component={Community} />
       <PrivateRoute path="/Category" component={Category} />
 
