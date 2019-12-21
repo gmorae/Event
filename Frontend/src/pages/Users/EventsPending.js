@@ -3,6 +3,7 @@ import Header from '../../components/shared/headerUsers'
 import { getEventsPendingUser } from '../../services/get'
 import './style.css'
 import { parseJwt } from '../../services/auth';
+import { format } from 'date-fns'
 
 class EventsPending extends React.Component {
 
@@ -42,7 +43,7 @@ class EventsPending extends React.Component {
 
                                         <tr>
                                             <th scope="row">{res.name_event}</th>
-                                            <td>{res.date_event}</td>
+                                            <td>{format(new Date(res.date_event), 'dd/MM/yyyy')}</td>
                                             <td><button class="btn btn-sm btn-grey">Detalhes</button></td>
 
                                         </tr>

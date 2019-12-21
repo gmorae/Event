@@ -3,7 +3,7 @@ import Header from '../../components/shared/headerUsers'
 import { getEventsApprovedUser } from '../../services/get'
 import './style.css'
 import { parseJwt } from '../../services/auth';
-
+import { format } from 'date-fns'
 class AllEventsUser extends React.Component {
 
     constructor() {
@@ -30,8 +30,6 @@ class AllEventsUser extends React.Component {
 
                                 <th class="th-sm">Nome</th>
                                 <th class="th-sm">Data do evento</th>
-                                <th class="th-sm">Status</th>
-                                <th class="th-sm">Responsavel</th>
                                 <th class="th-sm">Detalhes</th>
 
                             </tr>
@@ -44,10 +42,8 @@ class AllEventsUser extends React.Component {
 
                                         <tr>
                                             <th scope="row">{res.name_event}</th>
-                                            <td>{res.date_event}</td>
-                                            <td>{res.id_active}</td>
-                                            <td>{res.id_responsible}</td>
-                                            <td><button class="btn btn-sm btn-grey">Detalhes</button></td>
+                                            <td>{format(new Date(res.date_event), 'dd/MM/yyyy')}</td>
+                                             <td><button class="btn btn-sm btn-grey">Detalhes</button></td>
 
                                         </tr>
 

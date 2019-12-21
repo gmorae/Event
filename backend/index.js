@@ -160,7 +160,7 @@ app.get("/event/pending", (req, res) => {
 })
 
 app.get("/event/approved/:id", (req, res) => {
-    const sql = "select * from event where id_user = ? and id_active = 2"
+    const sql = "select * from event where id_user = ? and id_active = 1"
     conexao().query(sql, [req.params.id], (erro, ln, cl) => {
         console.log("Listagem")
         res.json(ln)

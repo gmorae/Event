@@ -2,6 +2,7 @@ import React from 'react'
 import Header from '../../components/shared/headerAdmin'
 import { getApprovedEvents } from '../../services/get'
 import './style.css'
+import { format } from 'date-fns'
 
 class ApprovedEvents extends React.Component {
 
@@ -42,7 +43,7 @@ class ApprovedEvents extends React.Component {
 
                                         <tr>
                                             <th scope="row">{res.name_event}</th>
-                                            <td>{res.date_event}</td>
+                                            <td>{format(new Date(res.date_event), 'MM/dd/yyyy')}</td>
                                             <td>{res.id_responsible}</td>
                                             <td><button class="btn btn-sm btn-grey">Detalhes</button></td>
 

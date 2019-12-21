@@ -58,7 +58,6 @@ class Register extends React.Component {
                 console.log("Retorno do login - JSON: ", response);
                 localStorage.setItem("usuario-easyTalk", response.data.token);
                 this.setState({ isLoading: false })
-                var base64 = localStorage.getItem("usuario-easyTalk").split('.')[1];                
                 if (parseJwt().user.id_type_user === 1) {
                     this.props.history.push('/Admin');
                 } else {

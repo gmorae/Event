@@ -2,7 +2,7 @@ import React from 'react'
 import Header from '../../components/shared/headerAdmin'
 import { getAllEvents } from '../../services/get'
 import './style.css'
-import Axios from 'axios';
+import { format } from 'date-fns'
 
 class AllEvents extends React.Component {
 
@@ -61,7 +61,7 @@ class AllEvents extends React.Component {
                                     return (
                                         <tr>
                                             <th scope="row">{res.name_event}</th>
-                                            <td>{res.date_event}</td>
+                                            <td>{format(new Date(res.date_event), 'MM/dd/yyyy')}</td>
                                             <td><button className="btn btn-sm btn-grey" data-toggle="modal" data-target={`#modal-${res.id_event}`}>Detalhes</button></td>
                                             <td><button type="button" className="btn btn-sm btn-outline-danger waves-effect" data-dismiss="modal">Recusar</button></td>
                                             <td><button type="button" data-toggle="modal" data-target={`#aprova-${res.id_event}`} className="btn btn-sm btn-outline-success waves-effect">Aprovar</button></td>

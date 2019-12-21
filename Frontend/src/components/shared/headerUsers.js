@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import './headerUsers.css'
-import { parseJwt } from '../../services/auth';
 import { ToastContainer, toast } from 'react-toastify';
 
 class headerUsers extends React.Component {
@@ -40,22 +39,6 @@ class headerUsers extends React.Component {
                                 <i class="fa fa-calendar fa-2x"></i>
                                 <span class="nav-text">
                                     Meus eventos pendentes
-                                </span>
-                            </Link>
-                        </li>
-                        <li class="has-subnav">
-                            <Link to="/EditUser">
-                                <i class="fa fa-user fa-2x"></i>
-                                <span class="nav-text">
-                                    Editar dados pessoais
-                                </span>
-                            </Link>
-                        </li>
-                        <li class="has-subnav">
-                            <Link to="EditPassword">
-                                <i class="fa fa-lock fa-2x"></i>
-                                <span class="nav-text">
-                                    Editar senha
                                 </span>
                             </Link>
                         </li>

@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Home from './pages/Home/Home';
 import Register from './pages/Register/Register';
-import HomeAdmin from './pages/Admin/HomeAdmin';
 import HomeUser from './pages/Users/HomeUser';
 import AllEvents from './pages/Admin/AllEvents';
 import ApprovedEvents from './pages/Admin/ApprovedEvents';
@@ -45,8 +44,7 @@ const Rotas = (
       <Route path="/" exact component={Home} />
       <Route path="/Register" component={Register} />
 
-      <PrivateRoute path="/Admin" component={HomeAdmin} />
-      <PrivateRoute path="/AllEvents" component={AllEvents} />
+      <PrivateRoute path="/Admin" component={AllEvents} />
       <PrivateRoute path="/ApprovedEvents" component={ApprovedEvents} />
       <PrivateRoute path="/DeclineEvents" component={DeclineEvents} />
       <PrivateRoute path="/Community" component={Community} />

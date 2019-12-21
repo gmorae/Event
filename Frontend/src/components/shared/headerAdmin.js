@@ -33,14 +33,6 @@ class headerAdmin extends React.Component {
                             </Link>
                         </li>
                         <li class="has-subnav">
-                            <Link to="/AllEvents">
-                                <i class="fa fa-calendar fa-2x"></i>
-                                <span class="nav-text">
-                                    Eventos pendentes
-                                </span>
-                            </Link>
-                        </li>
-                        <li class="has-subnav">
                             <Link to="/ApprovedEvents">
                                 <i class="fa fa-check fa-2x"></i>
                                 <span class="nav-text">

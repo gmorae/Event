@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './style.css'
 import { parseJwt } from '../../services/auth';
+import { getCategory } from '../../services/get'
 
 export default class HomeUser extends React.Component {
     constructor() {
@@ -18,7 +19,7 @@ export default class HomeUser extends React.Component {
         this.onChangeCoffe = this.onChangeCoffe.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.state = {
-
+            Category: [],
             postEvento: {
                 name_event: "",
                 description_event: "",
@@ -55,7 +56,7 @@ export default class HomeUser extends React.Component {
             date_event: this.state.date_event,
             coffe: this.state.coffe,
             id_user: parseJwt().user.id_user
-        };        
+        };
         Axios.post(`http://localhost:8080/event`, event)
             .then((res) => {
                 toast.success('Evento criado, aguarde pra ser aprovado');
@@ -63,7 +64,11 @@ export default class HomeUser extends React.Component {
             }).catch((error) => {
                 toast.error(error);
                 console.log(error)
-            });            
+            });
+    }
+    componentDidMount = async () => {
+        const get = await getCategory()
+        this.setState({ Category: get.data })
     }
     render() {
         return (
@@ -81,17 +86,21 @@ export default class HomeUser extends React.Component {
                                 <input type="text" placeholder="Nome do evento" name="name_event" onChange={this.onChangeNameEvent} />
                                 <input type="text" placeholder="Descrição do evento" name="description_event" onChange={this.onChangeDescriptionEvent} />
                                 <select name="id_category" onChange={this.onChangeCategory}>
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <option selected>Selecione uma categoria</option>
+                                    {
+                                        this.state.Category.map((res) => {
+                                            return (
+                                                <option key={res.id_Category}>{res.name_category}</option>
+                                            )
+                                        })
+                                    }
                                 </select>
                                 <input type="date" placeholder="Data do evento" name="date_event" onChange={this.onChangeDateEvent} />
 
                                 <h3>Coffe ?</h3>
                                 <div class="row ml-auto">
                                     <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="coffeSim" name="coffe" value="sim"onChange={this.onChangeCoffe} />
+                                        <input type="checkbox" class="custom-control-input" id="coffeSim" name="coffe" value="sim" onChange={this.onChangeCoffe} />
                                         <label class="custom-control-label" for="coffeSim">Sim</label>
                                     </div>
                                     <div class="custom-control custom-checkbox ml-md-5">
